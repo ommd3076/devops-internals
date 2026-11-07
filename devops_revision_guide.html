@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F1F0E9">
+<title>DevOps Lab / Internal Exam Master Guide — BISDL506</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F1F0E9;--ink:#181816;--blue:#2E4EFF;--orange:#FF8848;--yellow:#EDF261;--mint:#70D8B4;--violet:#A38AFF;--red:#F76960;--sky:#8DCDEF;--line:#B9B9B0;--white:#FFFEF9;--mono:'IBM Plex Mono',ui-monospace,'Cascadia Code',monospace;--display:'Archivo Black','Arial Black',sans-serif;--body:'DM Sans',Arial,sans-serif;--max:1370px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased}::selection{background:var(--yellow);color:var(--ink)}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-offset:3px}h1,h2,h3,p{margin-top:0}strong{font-weight:700}h1,h2,h3{letter-spacing:-.045em}h2{font-family:var(--display);font-size:clamp(32px,4.8vw,72px);line-height:.99;font-weight:900;max-width:1080px;margin-bottom:28px}h3{font-size:clamp(20px,2vw,28px);letter-spacing:-.04em;line-height:1.2}p{line-height:1.64}small,.micro{font:500 11px/1.5 var(--mono);letter-spacing:.045em}::marker{color:var(--blue)}
+.progress{position:fixed;z-index:100;left:0;top:0;width:0;height:5px;background:var(--blue);transition:width .08s linear}
+.topbar{position:sticky;z-index:90;top:0;height:60px;display:grid;grid-template-columns:220px 1fr auto;align-items:center;gap:12px;background:rgba(241,240,233,.96);border-bottom:2px solid var(--ink);backdrop-filter:blur(12px);padding:0 max(26px,calc((100vw - var(--max))/2 + 22px))}
+.mark{display:flex;gap:10px;align-items:center;font:900 16px var(--display);letter-spacing:-.065em}.mark-symbol{width:22px;height:22px;display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:2px;transform:rotate(-12deg)}.mark-symbol i{display:block;background:var(--blue)}.mark-symbol i:nth-child(2){background:var(--orange)}.mark-symbol i:nth-child(3){background:var(--mint)}.mark-symbol i:nth-child(4){background:var(--ink)}
+.nav{display:flex;justify-content:center;gap:5px}.nav a{padding:8px 10px;font:600 10px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.05em;transition:background .18s}.nav a:hover,.nav a.active{background:var(--yellow)}.edition{font:600 10px var(--mono);text-align:right;white-space:nowrap}.edition b{display:block;font-weight:600}.edition span{color:#77776D}
+main{overflow:hidden}.wrap{max-width:var(--max);margin:auto;padding:0 46px}.section{padding:90px 0 80px;border-bottom:2px solid var(--ink);position:relative}.eyebrow{font:600 11px/1.5 var(--mono);text-transform:uppercase;letter-spacing:.09em;display:flex;align-items:center;gap:12px;margin-bottom:20px}.eyebrow:before{content:'';display:inline-block;width:34px;height:6px;background:var(--blue)}.section-note{font:500 11px/1.5 var(--mono);color:#54544F;max-width:620px}.lead{font-size:clamp(18px,2vw,27px);line-height:1.45;max-width:920px;letter-spacing:-.025em}.rule{height:2px;background:var(--ink)}.tag{display:inline-block;padding:5px 9px;border:1.5px solid var(--ink);border-radius:2px;font:600 10px/1.2 var(--mono);text-transform:uppercase;white-space:nowrap}.tag.blue{background:var(--blue);color:#fff}.tag.yellow{background:var(--yellow)}.tag.red{background:var(--red);color:#fff}.tag.mint{background:var(--mint)}.tag.violet{background:var(--violet)}.tag.orange{background:var(--orange)}.tag.sky{background:var(--sky)}
+.hero{background:var(--paper);padding:60px 0 0;border-bottom:2px solid var(--ink)}.hero-top{display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:13px;margin-bottom:46px;gap:16px}.hero-top span{font:600 12px var(--mono);text-transform:uppercase}.hero-title{font:900 clamp(48px,8.5vw,130px)/.88 var(--display);letter-spacing:-.08em;text-transform:uppercase;margin:0 0 32px;max-width:1250px}.hero-title span{color:var(--blue);display:block}.hero-intro{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;margin-bottom:50px;align-items:end}.hero-intro p{font-size:clamp(19px,2.2vw,28px);max-width:760px;line-height:1.4;letter-spacing:-.03em;margin:0}.hero-detail{max-width:380px;margin-left:auto}.hero-detail .micro{display:block;border-top:2px solid var(--ink);padding-top:10px;margin-bottom:10px}.hero-detail p{font-size:14px;line-height:1.6;letter-spacing:0}.hero-ribbon{display:grid;grid-template-columns:repeat(5,1fr);border-top:2px solid var(--ink)}.hero-ribbon>div{min-height:110px;padding:18px 20px;border-right:2px solid var(--ink)}.hero-ribbon>div:last-child{border-right:0}.hero-ribbon small{display:block;margin-bottom:16px}.hero-ribbon b{font:900 clamp(16px,1.6vw,24px) var(--display);letter-spacing:-.05em}.hero-ribbon>div:nth-child(1){background:var(--yellow)}.hero-ribbon>div:nth-child(2){background:var(--mint)}.hero-ribbon>div:nth-child(3){background:var(--sky)}.hero-ribbon>div:nth-child(4){background:var(--violet)}.hero-ribbon>div:nth-child(5){background:var(--orange)}
+.section-index{position:absolute;right:max(28px,calc((100vw - var(--max))/2 + 44px));top:90px;color:rgba(24,24,22,.12);font:900 clamp(70px,8.5vw,140px)/1 var(--display);letter-spacing:-.07em;pointer-events:none}.section-head{position:relative;z-index:1;max-width:1050px}.wide-split{display:grid;grid-template-columns:1fr 1fr;gap:24px}.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.panel{border:2px solid var(--ink);border-radius:2px;background:var(--white);padding:26px;min-width:0}.panel .k{font:600 11px var(--mono);margin-bottom:20px}.panel p:last-child{margin-bottom:0}.panel h3{margin:0 0 12px}.panel.black{background:var(--ink);color:var(--paper)}.panel.blue{background:var(--blue);color:#fff}.panel.yellow{background:var(--yellow)}.panel.orange{background:var(--orange)}.panel.mint{background:var(--mint)}.panel.sky{background:var(--sky)}.panel.violet{background:var(--violet)}.panel.red{background:var(--red);color:#fff}.panel .body{font-size:14px;line-height:1.58}
+code,pre{font-family:var(--mono)}pre{background:#181816;color:#EDF261;padding:16px;border:2px solid var(--ink);border-radius:2px;overflow-x:auto;font-size:12.5px;line-height:1.5;margin:12px 0}code{background:rgba(0,0,0,.06);padding:2px 5px;border-radius:2px}
+.proc-box{border:2px solid var(--ink);background:var(--white);margin-bottom:24px;border-radius:2px;overflow:hidden}
+.proc-header{background:var(--ink);color:var(--paper);padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.proc-header h3{margin:0;font:900 24px var(--display);letter-spacing:-.04em}
+.proc-header .meta{font:600 11px var(--mono);color:var(--yellow)}
+.proc-body{padding:26px 28px}
+.proc-steps{list-style:none;padding:0;margin:0}
+.proc-steps>li{position:relative;padding-left:44px;margin-bottom:24px;border-bottom:1px dashed var(--line);padding-bottom:20px}
+.proc-steps>li:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.proc-steps .step-num{position:absolute;left:0;top:0;width:30px;height:30px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font:900 14px var(--mono);border:1.5px solid var(--ink)}
+.proc-steps h4{margin:0 0 8px;font:700 17px var(--body);letter-spacing:-.02em}
+.proc-steps p{font-size:14px;line-height:1.6;margin:0 0 10px}
+.warnlist{border-top:2px solid var(--ink);margin-top:25px}.warn{display:grid;grid-template-columns:55px 1.2fr 1.8fr;gap:20px;align-items:start;padding:22px 10px;border-bottom:1px solid var(--ink)}.warn .warn-n{font:900 24px var(--display)}.warn h3{font-size:19px;margin:0 0 6px}.warn p{font-size:13.5px;margin:0;line-height:1.55}.warn:nth-child(even){background:rgba(247,105,96,.08)}
+.qa-card{border:2px solid var(--ink);background:var(--white);padding:22px 24px;border-radius:2px;margin-bottom:14px;transition:transform .15s}.qa-card:hover{transform:translateX(3px)}.qa-card .q{font:700 16px/1.35 var(--body);letter-spacing:-.02em;margin-bottom:10px;display:flex;gap:12px;align-items:baseline}.qa-card .q-num{font:900 13px var(--mono);color:var(--blue);background:rgba(46,78,255,.1);padding:2px 8px;border-radius:2px}.qa-card .ans{font-size:13.5px;line-height:1.6;color:#282824;border-top:1px dashed var(--line);padding-top:10px}
+.tab-row{display:flex;gap:6px;border-bottom:2px solid var(--ink);margin-bottom:26px;overflow-x:auto;padding-bottom:2px}
+.tab-btn{border:2px solid var(--ink);border-bottom:0;padding:12px 20px;font:700 12px var(--mono);background:var(--white);text-transform:uppercase;cursor:pointer;transition:all .15s;white-space:nowrap}
+.tab-btn.active{background:var(--blue);color:#fff}.tab-btn:hover:not(.active){background:var(--yellow)}
+.tab-content{display:none}.tab-content.active{display:block}
+.footer{padding:28px 0;background:var(--blue);color:#fff}.footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:15px}.footer b{font:900 22px var(--display)}.footer span{font:500 11px var(--mono)}
+@media(max-width:1120px){.topbar{padding:0 22px;grid-template-columns:190px 1fr auto}.wrap{padding:0 28px}.hero-ribbon{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:850px){.topbar{grid-template-columns:1fr auto;height:auto;padding:12px 18px}.nav{grid-column:1/-1;justify-content:flex-start;overflow-x:auto;padding:10px 0 4px;scrollbar-width:none}.hero-intro,.wide-split,.two,.four,.three{grid-template-columns:1fr}.hero-ribbon{grid-template-columns:repeat(2,1fr)}.hero-ribbon>div:nth-child(2){border-right:0}.warn{grid-template-columns:35px 1fr}.warn p{grid-column:2}.proc-header{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="topbar">
+<a class="mark" href="#top"><span class="mark-symbol"><i></i><i></i><i></i><i></i></span>DEVOPS LAB</a>
+<nav class="nav">
+<a href="#procedures">01 / Procedures (5 Tabs)</a>
+<a href="#errors">02 / Error Vault</a>
+<a href="#viva">03 / Viva (Actual Teacher Qs)</a>
+<a href="#checklist">04 / Checklist</a>
+</nav>
+<div class="edition"><b>INTERNAL EXAM</b><span>27 OCT 2026</span></div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+<div class="wrap">
+ <div class="hero-top"><span>Course: BISDL506 / DevOps Laboratory</span><span>Exam Time: 2:30–4:30 PM | Target: 15+/20</span></div>
+ <h1 class="hero-title">STRICT LAB<br><span>INTERNAL</span>EXAM GUIDE.</h1>
+ <div class="hero-intro">
+  <p>Verbatim procedures, exact commands, the previous ChatGPT browser error fixes, and the <strong>exact viva questions asked by your teacher</strong> across all lab sessions.</p>
+  <div class="hero-detail"><span class="micro">REVISION PROTOCOL</span><p>Pure practical procedures, zero irregular symbols, direct viva answers, and instant troubleshooting.</p></div>
+ </div>
+</div>
+<div class="hero-ribbon">
+ <div><small>EXP 01</small><b>Git Conflict</b></div>
+ <div><small>EXP 02</small><b>Maven Build</b></div>
+ <div><small>EXP 03</small><b>Docker Hub</b></div>
+ <div><small>EXP 04</small><b>Jenkins CI</b></div>
+ <div><small>EXP 05</small><b>Slack Alerts</b></div>
+</div>
+</section>
+
+<!-- SECTION 1: PROCEDURES TAB SYSTEM -->
+<section class="section" id="procedures">
+<div class="section-index">01</div>
+<div class="wrap">
+ <div class="section-head">
+  <div class="eyebrow">01 / Complete Step-by-Step Practical Guides</div>
+  <h2>Full Lab Procedures & Code.</h2>
+  <p class="lead">Select any experiment below to view the exhaustive, step-by-step procedure matching your handwritten record book.</p>
+ </div>
+
+ <!-- PROGRAM TABS -->
+ <div class="tab-row" style="margin-top:30px">
+  <button class="tab-btn active" onclick="showProcTab('proc-exp1')">Exp 01 / Git Conflict</button>
+  <button class="tab-btn" onclick="showProcTab('proc-exp2')">Exp 02 / Maven Build</button>
+  <button class="tab-btn" onclick="showProcTab('proc-exp3')">Exp 03 / Docker Apache</button>
+  <button class="tab-btn" onclick="showProcTab('proc-exp4')">Exp 04 / Jenkins CI</button>
+  <button class="tab-btn" onclick="showProcTab('proc-exp5')">Exp 05 / Jenkins + Slack</button>
+ </div>
+
+ <!-- TAB 1: EXP 01 (GIT) -->
+ <div id="proc-exp1" class="tab-content active">
+  <div class="proc-box">
+   <div class="proc-header">
+    <h3>Experiment 01: Source Code Management & Collaboration (Git)</h3>
+    <span class="meta">Date: 09-09-2026 | Page No: 01–02</span>
+   </div>
+   <div class="proc-body">
+    <p><b>Aim:</b> Initialize the Git repository to perform core version control operations (add, commit, log) and simulate a multi-branch workflow to trigger, analyze and manually resolve merge conflicts.</p>
+    
+    <div class="two" style="margin:20px 0">
+     <div class="panel yellow">
+      <div class="k">BASE & BRANCH CODE</div>
+      <p><b>master branch:</b></p>
+<pre>def calculator(a, b):
+    return a + b
+
+print(calculator(5, 3))</pre>
+      <p><b>b1 branch:</b></p>
+<pre>def add(a, b):
+    return a + b
+
+print(add(5, 3))</pre>
+      <p><b>b2 branch:</b></p>
+<pre>def cal(a, b):
+    return a + b
+
+print(cal(5, 3))</pre>
+     </div>
+     <div class="panel sky">
+      <div class="k">CONFLICT MARKERS ANATOMY</div>
+      <p>When merging <code>b2</code> into <code>master</code> after <code>b1</code>:</p>
+<pre>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD (Current Change)
+def add(a, b):
+    return a + b
+print(add(5, 3))
+=======
+def cal(a, b):
+    return a + b
+print(cal(5, 3))
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; b2 (Incoming Change)</pre>
+      <p class="body"><b>Resolution:</b> Delete markers <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>, keep desired version, then stage & commit.</p>
+     </div>
+    </div>
+
+    <ul class="proc-steps">
+     <li><span class="step-num">1</span><h4>Create Project Folder</h4><p>Create a new folder on Desktop (e.g. <code>program-1</code>).</p></li>
+     <li><span class="step-num">2</span><h4>Launch VS Code</h4><p>Open the folder, in place of the Windows Explorer folder path/URL type <code>cmd</code> &rarr; in command prompt type <code>code .</code>.</p></li>
+     <li><span class="step-num">3</span><h4>Create Source Code File</h4><p>In VS Code, create a file with <code>.py</code> extension: <code>calculator.py</code>. Write the simple calculator function.</p></li>
+     <li><span class="step-num">4</span><h4>Initialize & Base Commit on Master</h4><p>In VS Code open the terminal (Ctrl + `) and execute:</p>
+<pre>git init
+git add .
+git commit -m "second"</pre>
+     <p>Check active branch: <code>git branch</code> (displays <code>* master</code> or <code>* main</code>).</p></li>
+     <li><span class="step-num">5</span><h4>Create Feature Branches b1 and b2</h4><p>Execute:</p>
+<pre>git branch b1
+git branch b2</pre></li>
+     <li><span class="step-num">6</span><h4>Switch to b1 & Commit Changes</h4><p>Execute: <code>git switch b1</code> (b1 file opens). Modify <code>calculator.py</code> to use function name <code>def add(a, b):</code>. Then execute:</p>
+<pre>git add .
+git commit -m "branch 1"</pre></li>
+     <li><span class="step-num">7</span><h4>Switch to b2 & Commit Conflicting Changes</h4><p>Execute: <code>git switch b2</code> (b2 file opens). In <code>calculator.py</code> on the exact same lines, change function name to <code>def cal(a, b):</code>. Then execute:</p>
+<pre>git add .
+git commit -m "branch 2"</pre></li>
+     <li><span class="step-num">8</span><h4>Switch back to Master</h4><p>Execute: <code>git switch master</code>. Verify active branch using <code>git branch</code>.</p></li>
+     <li><span class="step-num">9</span><h4>Fast-Forward Merge b1</h4><p>Execute: <code>git merge b1</code>. Output will state <b>Fast-forward</b> (no conflicts because master had no other commits).</p></li>
+     <li><span class="step-num">10</span><h4>Trigger Merge Conflict with b2</h4><p>Execute: <code>git merge b2</code>. Terminal outputs:</p>
+<pre>Auto-merging calculator.py
+CONFLICT (content): Merge conflict in calculator.py
+Automatic merge failed; fix conflicts and then commit the result.</pre></li>
+     <li><span class="step-num">11</span><h4>Resolve Conflict & Finalize Commit</h4><p>Open <code>calculator.py</code>. Choose <i>Accept Current</i>, <i>Accept Incoming</i>, or manually remove markers. Then conclude merge in terminal:</p>
+<pre>git add .
+git commit -m "conflict resolved"
+git status   # Displays: "nothing to commit, working tree clean"</pre></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+
+ <!-- TAB 2: EXP 02 (MAVEN) -->
+ <div id="proc-exp2" class="tab-content">
+  <div class="proc-box">
+   <div class="proc-header">
+    <h3>Experiment 02: Automated Build & Dependency Management using Apache Maven</h3>
+    <span class="meta">Date: 21-09-2026 | Page No: 03–04</span>
+   </div>
+   <div class="proc-body">
+    <p><b>Aim:</b> Construct a build and standard Java project structure to manage dependencies via pom.xml and automate the build lifecycle - specifically compilation, unit testing, and packaging to generate deployable artifacts.</p>
+
+    <div class="two" style="margin:20px 0">
+     <div class="panel mint">
+      <div class="k">POM.XML DEPENDENCY (JSON-SIMPLE)</div>
+<pre>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.googlecode.json-simple&lt;/groupId&gt;
+        &lt;artifactId&gt;json-simple&lt;/artifactId&gt;
+        &lt;version&gt;1.1.1&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</pre>
+      <p class="body">Paste inside <code>&lt;dependencies&gt;</code> tag after the default junit dependency.</p>
+     </div>
+     <div class="panel yellow">
+      <div class="k">JSON/STUDENT.JSON DATA FILE</div>
+      <p>Created in folder <code>JSON/</code> at the project root level:</p>
+<pre>{
+    "firstname": "Khushi",
+    "lastname": "M"
+}</pre>
+     </div>
+    </div>
+
+    <ul class="proc-steps">
+     <li><span class="step-num">1</span><h4>Create Maven Project in Eclipse</h4><p>Open Eclipse &rarr; <b>File &rarr; New &rarr; Maven Project</b> &rarr; Click <b>Next</b>.</p></li>
+     <li><span class="step-num">2</span><h4>Select Archetype & Catalog</h4><p>In Catalog dropdown select <b>Internal</b> (or All Catalogs and filter <code>quickstart</code>) &rarr; select <b>maven-archetype-quickstart</b> &rarr; Click <b>Next</b>.</p></li>
+     <li><span class="step-num">3</span><h4>Enter Project Coordinates</h4><p>Group Id: <code>mod1</code> &rarr; Artifact Id: <code>mod1</code> (or your chosen name) &rarr; Click <b>Finish</b>. (If console prompts for input during archetype generation, type <code>y</code> and press Enter &rarr; BUILD SUCCESS).</p></li>
+     <li><span class="step-num">4</span><h4>Create JSON Data Folder & File</h4><p>Right-click the Maven project root &rarr; <b>New &rarr; Folder</b> named <code>JSON</code>. Right-click <code>JSON</code> folder &rarr; <b>New &rarr; File</b> named <code>student.json</code>. Write the JSON object with <code>firstname</code> and <code>lastname</code>.</p></li>
+     <li><span class="step-num">5</span><h4>Add Dependency in pom.xml</h4><p>Open <code>pom.xml</code> &rarr; Add the <code>json-simple 1.1.1</code> dependency block inside <code>&lt;dependencies&gt;</code> &rarr; Save file (Ctrl + S). Maven automatically downloads the jar into <i>Maven Dependencies</i>.</p></li>
+     <li><span class="step-num">6</span><h4>Create Java Class readjson.java</h4><p>Expand <code>src/test/java</code> (or <code>src/main/java</code>) &rarr; right-click package &rarr; <b>New &rarr; Class</b> &rarr; Name: <code>readjson</code> &rarr; Check <code>public static void main(String[] args)</code> &rarr; Finish.</p>
+     <p>Write the following parsing code:</p>
+<pre>package mod1;
+import java.io.FileReader;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+public class readjson {
+    public static void main(String[] args) throws Exception {
+        JSONParser jsonparser = new JSONParser();
+        FileReader reader = new FileReader(".\\JSON\\student.json");
+        Object obj = jsonparser.parse(reader);
+        JSONObject studentobj = (JSONObject) obj;
+        String fname = (String) studentobj.get("firstname");
+        String lname = (String) studentobj.get("lastname");
+        System.out.println("Firstname : " + fname);
+        System.out.println("Lastname : " + lname);
+    }
+}</pre></li>
+     <li><span class="step-num">7</span><h4>Run & Verify Output</h4><p>Right-click <code>readjson.java</code> &rarr; <b>Run As &rarr; Java Application</b>.<br>Console outputs:
+<pre>Firstname : Khushi
+Lastname : M</pre></p></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+
+ <!-- TAB 3: EXP 03 (DOCKER) -->
+ <div id="proc-exp3" class="tab-content">
+  <div class="proc-box">
+   <div class="proc-header">
+    <h3>Experiment 03: Application Containerization using Docker</h3>
+    <span class="meta">Date: 03-10-2026 | Page No: 05</span>
+   </div>
+   <div class="proc-body">
+    <p><b>Aim:</b> Create a Dockerfile to package static web assets into an Apache format container, configuring the environment to serve HTML content and distributing the finalized image to container registry.</p>
+
+    <div class="two" style="margin:20px 0">
+     <div class="panel orange">
+      <div class="k">DOCKERFILE (NO EXTENSION)</div>
+<pre>FROM httpd:latest
+COPY index.html /usr/local/apache2/htdocs/</pre>
+      <p class="body"><i>Critical: Ensure the trailing slash <code>/</code> is present on htdocs!</i></p>
+     </div>
+     <div class="panel sky">
+      <div class="k">INDEX.HTML WEB ASSET</div>
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;DevOps Docker Test&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Docker Web Application Container&lt;/h1&gt;
+  &lt;p&gt;Hosted on Apache HTTPD in Docker&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+     </div>
+    </div>
+
+    <ul class="proc-steps">
+     <li><span class="step-num">1</span><h4>Prerequisites</h4><p>Open Docker Desktop in Windows and ensure the Docker engine is running (green status). Sign in to Docker Desktop and Docker Hub in your browser.</p></li>
+     <li><span class="step-num">2</span><h4>Create Directory & Files</h4><p>Create a folder named <code>Docker</code> on Desktop. Open it in VS Code. Create <code>Dockerfile</code> (no extension) and <code>index.html</code>.</p></li>
+     <li><span class="step-num">3</span><h4>Build Local Container Image</h4><p>Open terminal in VS Code inside the <code>Docker</code> folder and run:</p>
+<pre>docker build -t my-app .</pre>
+     <p><i>(Do not omit the dot <code>.</code> at the end — it represents the build context).</i></p></li>
+     <li><span class="step-num">4</span><h4>Run Container on Port 49153</h4><p>Run the container in detached mode mapped to port 49153:</p>
+<pre>docker run -d --name c1 -p 49153:80 my-app</pre>
+     <p>Verify by opening <code>http://localhost:49153</code> in your browser. Your custom HTML page displays.</p></li>
+     <li><span class="step-num">5</span><h4>Tag Image for Docker Hub</h4><p>Check image ID with <code>docker images</code>, then tag the image with your Docker Hub username:</p>
+<pre>docker tag my-app ommd3076/my-app:latest</pre></li>
+     <li><span class="step-num">6</span><h4>Push Image to Docker Hub Registry</h4><p>Log in via CLI if not logged in (<code>docker login</code>) and push:</p>
+<pre>docker push ommd3076/my-app:latest</pre>
+     <p>Verify the repository on <code>hub.docker.com</code>.</p></li>
+     <li><span class="step-num">7</span><h4>Pull Image & Run on Secondary Port (9094)</h4><p>Pull the published image from Docker Hub and run it on port 9094:</p>
+<pre>docker pull ommd3076/my-app:latest
+docker run -d --name c2 -p 9094:80 ommd3076/my-app:latest</pre>
+     <p>Verify in browser at <code>http://localhost:9094</code>.</p></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+
+ <!-- TAB 4: EXP 04 (JENKINS CI) -->
+ <div id="proc-exp4" class="tab-content">
+  <div class="proc-box">
+   <div class="proc-header">
+    <h3>Experiment 04: Continuous Integration Pipeline Automation using Jenkins</h3>
+    <span class="meta">Date: 22-10-2026 | Page No: 06–07</span>
+   </div>
+   <div class="proc-body">
+    <p><b>Aim:</b> Design and implement a Jenkins pipeline to automate the CI lifecycle, configuring webhooks to trigger builds from Git and executing automated build stages to ensure code stability.</p>
+
+    <div class="two" style="margin:20px 0">
+     <div class="panel violet">
+      <div class="k">GITHUB REPOSITORY FILE: TEST.JAVA</div>
+<pre>public class test {
+    public static void main(String[] args) {
+        System.out.println("Hello Jenkins CI Pipeline Build Success!");
+    }
+}</pre>
+     </div>
+     <div class="panel yellow">
+      <div class="k">WINDOWS BATCH BUILD COMMANDS</div>
+<pre>java --version
+javac test.java
+java test</pre>
+      <p class="body">Configured under <i>Build Steps &rarr; Execute Windows batch command</i>.</p>
+     </div>
+    </div>
+
+    <ul class="proc-steps">
+     <li><span class="step-num">1</span><h4>Access Jenkins Dashboard</h4><p>Open browser and navigate to <code>http://localhost:8080</code>.</p></li>
+     <li><span class="step-num">2</span><h4>Login & Password Retrieval</h4><p>Username: <code>admin</code>. To retrieve the administrator password in Windows PowerShell, execute:</p>
+<pre>Get-Content "C:\Program Files\Jenkins\secrets\initialAdminPassword"</pre>
+     <p><i>(Or check <code>C:\ProgramData\Jenkins\.jenkins\secrets\initialAdminPassword</code>).</i></p></li>
+     <li><span class="step-num">3</span><h4>Create Freestyle Project</h4><p>Click <b>New Item</b> &rarr; Enter name <code>lab4</code> &rarr; Select <b>Freestyle project</b> &rarr; Click <b>OK</b>.</p></li>
+     <li><span class="step-num">4</span><h4>Configure GitHub Source Code Management</h4><p>In project configuration, scroll to <b>Source Code Management</b>:</p>
+     <p>• Select <b>Git</b>.<br>
+     • Go to GitHub, create a new repo, commit <code>test.java</code>, and copy repo URL.<br>
+     • In Jenkins, paste the URL in <b>Repository URL</b>.<br>
+     • <b>Branch to build:</b> Enter <code>*/main</code> (or <code>*/master</code>).</p></li>
+     <li><span class="step-num">5</span><h4>Configure Build Triggers</h4><p>Under <b>Build Triggers</b>, check: <b>GitHub hook trigger for GITScm polling</b> (or Poll SCM <code>H/5 * * * *</code>).</p></li>
+     <li><span class="step-num">6</span><h4>Add Build Steps</h4><p>Under <b>Build Steps</b> &rarr; Click <b>Add build step</b> &rarr; Select <b>Execute Windows batch command</b>. Enter:</p>
+<pre>java --version
+javac test.java
+java test</pre></li>
+     <li><span class="step-num">7</span><h4>Save & Execute Build</h4><p>Click <b>Save</b> at the bottom. On the left sidebar, click <b>Build Now</b>.</p></li>
+     <li><span class="step-num">8</span><h4>Inspect Console Output</h4><p>Under <b>Build History</b> on the left, click on the build (e.g. <code>#1</code>) &rarr; Click <b>Console Output</b>.<br>
+     Verify standard output displays the Java version, execution output, and terminates with <code>Finished: SUCCESS</code>.</p></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+
+ <!-- TAB 5: EXP 05 (JENKINS + SLACK) -->
+ <div id="proc-exp5" class="tab-content">
+  <div class="proc-box">
+   <div class="proc-header">
+    <h3>Experiment 05: Jenkins Post-Build Action & Slack Integration</h3>
+    <span class="meta">Date: 15-10-2026 | Page No: 08–09</span>
+   </div>
+   <div class="proc-body">
+    <p><b>Aim:</b> Configure a Jenkins post-build action to integrate with a Slack workspace, enabling automated real-time notifications for build success, failure and pipeline status updates to a dedicated communication channel.</p>
+
+    <div class="two" style="margin:20px 0">
+     <div class="panel mint">
+      <div class="k">JENKINS SYSTEM SLACK CONFIGURATION</div>
+      <p><b>Manage Jenkins &rarr; System &rarr; Slack:</b><br>
+      • <b>Workspace:</b> Subdomain ONLY (e.g. <code>om-devops</code>, NOT <code>https://...</code>)<br>
+      • <b>Credential:</b> Add &rarr; Secret text (Paste Slack token, ID: <code>admin</code>)<br>
+      • <b>Default channel:</b> <code>#devops</code> (must include <code>#</code>)</p>
+     </div>
+     <div class="panel sky">
+      <div class="k">POST-BUILD ACTION CHECKBOXES</div>
+      <p><b>In Project Configure &rarr; Post-build Actions &rarr; Slack Notifications:</b><br>
+      [x] Notify Build Start<br>
+      [x] Notify Success<br>
+      [x] Notify Failure<br>
+      [x] Notify Every Failure</p>
+     </div>
+    </div>
+
+    <ul class="proc-steps">
+     <li><span class="step-num">1</span><h4>Setup Slack Workspace & Channel</h4><p>Sign in to Slack. Create a dedicated public channel named <code>#devops</code> (or your chosen channel name).</p></li>
+     <li><span class="step-num">2</span><h4>Install Jenkins CI App in Slack</h4><p>In Slack, click on your workspace name &rarr; <b>Tools & settings &rarr; Manage apps</b> (or Browse App Directory). Search for <b>Jenkins CI</b> &rarr; Click <b>Add to Slack</b>.</p></li>
+     <li><span class="step-num">3</span><h4>Configure Slack Channel & Retrieve Token</h4><p>In "Post to Channel", select your channel (e.g. <code>#devops</code>) &rarr; Click <b>Add Jenkins CI Integration</b>.<br>
+     Scroll down to <b>Step 3</b> on the page:
+     <br>• Note your <b>Team Domain</b> (the workspace name, e.g., <code>om-devops</code>).
+     <br>• Copy the <b>Integration Token Credential ID</b> (secret token string).</p></li>
+     <li><span class="step-num">4</span><h4>Verify Jenkins Plugin</h4><p>In Jenkins, go to <b>Manage Jenkins &rarr; Plugins &rarr; Installed plugins</b>. Ensure <b>Slack Notification</b> plugin is installed and enabled (if not, install from Available plugins and restart).</p></li>
+     <li><span class="step-num">5</span><h4>Configure Global Slack Settings in Jenkins</h4><p>Go to <b>Manage Jenkins &rarr; System</b> &rarr; Scroll down to <b>Slack</b>:
+     <br>• In <b>Workspace</b>: Type your Slack Team Domain name (subdomain only, no URL!).
+     <br>• In <b>Credential</b>: Click <b>Add &rarr; Jenkins</b>:
+       <br>&nbsp;&nbsp;&nbsp;&nbsp;- <i>Kind:</i> Select <b>Secret text</b>
+       <br>&nbsp;&nbsp;&nbsp;&nbsp;- <i>Secret:</i> Paste the Integration Token from Slack Step 3
+       <br>&nbsp;&nbsp;&nbsp;&nbsp;- <i>ID:</i> Enter <code>admin</code> (or <code>slack-token</code>)
+       <br>&nbsp;&nbsp;&nbsp;&nbsp;- <i>Description:</i> <code>slack credential</code> &rarr; Click <b>Add</b>.
+     <br>• Select this credential from the dropdown.
+     <br>• In <b>Default channel / member id</b>: Enter <code>#devops</code>.
+     <br>• Click <b>Test Connection</b>. Verify it displays <code>Success</code> below. Click <b>Save</b>.</p></li>
+     <li><span class="step-num">6</span><h4>Add Post-build Action to Jenkins Project</h4><p>Open your Jenkins job (e.g. <code>lab4</code>) &rarr; Click <b>Configure</b> &rarr; Scroll to <b>Post-build Actions</b>:
+     <br>• Click <b>Add post-build action</b> &rarr; Select <b>Slack Notifications</b>.
+     <br>• Check boxes: <i>Notify Build Start</i>, <i>Notify Success</i>, <i>Notify Failure</i>, <i>Notify Every Failure</i>.
+     <br>• Click <b>Save</b>.</p></li>
+     <li><span class="step-num">7</span><h4>Trigger Build & Verify in Slack</h4><p>Click <b>Build Now</b> on the project sidebar.<br>
+     Open Slack in your browser or desktop app &rarr; In <code>#devops</code> channel, confirm immediate messages appear:
+     <br>1. <code>Starting build #... by user admin</code>
+     <br>2. <code>SUCCESS after 1 sec</code> (highlighted with green vertical status bar).</p></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+
+</div>
+</section>
+
+<!-- SECTION 2: ERROR VAULT -->
+<section class="section" id="errors">
+<div class="section-index">02</div>
+<div class="wrap">
+ <div class="section-head">
+  <div class="eyebrow">02 / Error Diagnostic Vault</div>
+  <h2>Real Recorded Errors & Exact Fixes.</h2>
+  <p class="lead">Every single blocker you encountered in previous sessions, why it failed, and how to instantly solve it in front of the examiner.</p>
+ </div>
+
+ <div class="warnlist">
+  <!-- Error 1: Slack Browser Fix -->
+  <div class="warn">
+   <span class="warn-n">01</span>
+   <div>
+    <span class="tag red">FATAL CRASH</span>
+    <h3>Slack Integration: "Test Connection Failed"</h3>
+    <small>THE PREVIOUS CHATGPT BROWSER FIX</small>
+   </div>
+   <div>
+    <p><b>Root Cause:</b> (1) Pasting full URL <code>https://workspace.slack.com</code> into Jenkins "Workspace" field. (2) Saving the Slack integration token as "Username with password" instead of <b>Secret text</b>. (3) Channel name missing the <code>#</code> prefix.</p>
+    <p style="margin-top:8px"><b>The Resolution:</b><br>
+    1. In Jenkins <i>Manage Jenkins &rarr; System &rarr; Slack</i>, enter <b>subdomain only</b> (e.g. <code>om-devops</code>, never <code>slack.com</code>).<br>
+    2. Add credential as <b>Secret text</b>, paste the Integration Token from Slack App step 3.<br>
+    3. Set Default channel to <code>#channel-name</code>.<br>
+    4. Ensure the <b>Jenkins CI</b> app is explicitly added to the channel inside Slack.</p>
+   </div>
+  </div>
+
+  <!-- Error 2: Docker Apache Default Page -->
+  <div class="warn">
+   <span class="warn-n">02</span>
+   <div>
+    <span class="tag orange">SILENT BUG</span>
+    <h3>Docker: Container Shows "It Works!" Instead of HTML</h3>
+    <small>DOCKER DESKTOP TRAP</small>
+   </div>
+   <div>
+    <p><b>Root Cause:</b> (1) Clicking "Run" on the base image <code>httpd</code> instead of your built custom image (<code>my-app</code>) in Docker Desktop UI. (2) Dockerfile copy path missing the trailing slash <code>/usr/local/apache2/htdocs/</code>.</p>
+    <p style="margin-top:8px"><b>The Resolution:</b><br>
+    1. In Docker Desktop, go to <b>Containers</b>, delete running container.<br>
+    2. Go to <b>Images</b> tab, ensure you launch your custom tagged image, NOT <code>httpd</code>.<br>
+    3. Hard refresh browser using <b>Ctrl + F5</b> to bypass cached Apache static page.</p>
+   </div>
+  </div>
+
+  <!-- Error 3: Jenkins Password PowerShell Cmdlet Error -->
+  <div class="warn">
+   <span class="warn-n">03</span>
+   <div>
+    <span class="tag red">POWERSHELL SYNTAX</span>
+    <h3>Jenkins Password: "'C:\Program' is not recognized"</h3>
+    <small>OCT 15 LAB ATTEMPT</small>
+   </div>
+   <div>
+    <p><b>Root Cause:</b> Executing unquoted file path <code>C:\Program Files\Jenkins\secrets\...</code> directly in PowerShell terminal. PowerShell treats the space after "Program" as an argument separator.</p>
+    <p style="margin-top:8px"><b>The Resolution:</b> Use the <code>Get-Content</code> cmdlet with double quotes:<br>
+    <code>Get-Content "C:\Program Files\Jenkins\secrets\initialAdminPassword"</code><br>
+    <i>(Note: File has NO <code>.txt</code> extension. Do not append .txt).</i></p>
+   </div>
+  </div>
+
+  <!-- Error 4: Git Merge Conflict Incomplete -->
+  <div class="warn">
+   <span class="warn-n">04</span>
+   <div>
+    <span class="tag yellow">GIT MERGE TRAP</span>
+    <h3>Git: "You are still merging" or Editor Staged Markers</h3>
+    <small>VS CODE MERGE EDITOR</small>
+   </div>
+   <div>
+    <p><b>Root Cause:</b> Closing the merge conflict editor without clicking "Complete Merge", or leaving raw <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> markers in the file.</p>
+    <p style="margin-top:8px"><b>The Resolution:</b><br>
+    1. Open <code>calculator.py</code>, manually verify no conflict markers exist.<br>
+    2. In terminal run: <code>git add .</code> followed by <code>git commit -m "conflict resolved"</code>.<br>
+    3. Run <code>git status</code> to confirm "working tree clean".</p>
+   </div>
+  </div>
+
+  <!-- Error 5: Maven JSON File Not Found -->
+  <div class="warn">
+   <span class="warn-n">05</span>
+   <div>
+    <span class="tag mint">JAVA RUNTIME</span>
+    <h3>Maven: FileNotFoundException: .\JSON\student.json</h3>
+    <small>ECLIPSE WORKING DIR</small>
+   </div>
+   <div>
+    <p><b>Root Cause:</b> Creating the <code>JSON/</code> folder inside <code>src/</code> instead of the project root directory where Eclipse sets working directory.</p>
+    <p style="margin-top:8px"><b>The Resolution:</b> Create the <code>JSON</code> folder directly at project root level (same level as <code>pom.xml</code> and <code>src/</code>).</p>
+   </div>
+  </div>
+ </div>
+</div>
+</section>
+
+<!-- SECTION 3: VIVA QUESTION BANK -->
+<section class="section" id="viva">
+<div class="section-index">03</div>
+<div class="wrap">
+ <div class="section-head">
+  <div class="eyebrow">03 / Actual Teacher Viva Questions</div>
+  <h2>Exact Viva Questions Recorded in Lab Sessions.</h2>
+  <p class="lead">The exact questions asked by your teacher in previous chats, organized by practical. Direct, crisp answers for maximum marks.</p>
+ </div>
+
+ <!-- TABS -->
+ <div class="tab-row">
+  <button class="tab-btn active" onclick="showVivaTab('viva-git')">01 / Git</button>
+  <button class="tab-btn" onclick="showVivaTab('viva-maven')">02 / Maven (Teacher Qs)</button>
+  <button class="tab-btn" onclick="showVivaTab('viva-docker')">03 / Docker (Teacher Qs)</button>
+  <button class="tab-btn" onclick="showVivaTab('viva-jenkins')">04 / Jenkins & Polling</button>
+  <button class="tab-btn" onclick="showVivaTab('viva-slack')">05 / Jenkins + Slack</button>
+ </div>
+
+ <!-- TAB 1: GIT -->
+ <div id="viva-git" class="tab-content active">
+  <div class="qa-card"><div class="q"><span class="q-num">Q01</span>What is Git and why is it used in DevOps?</div><div class="ans">Git is a distributed version control system that tracks source code changes over time, allows parallel multi-branch development, enables traceability of every change, and integrates with CI/CD tools to trigger automated testing and builds.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q02</span>What is the difference between Git and GitHub?</div><div class="ans"><b>Git</b> is the local version control command-line tool installed on your machine. <b>GitHub</b> is a cloud-based hosting platform that stores remote Git repositories and provides collaboration tools, pull requests, and webhooks.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q03</span>What is the purpose of branches (b1, b2, master)?</div><div class="ans">Branches allow developers to work on new features, bug fixes, or experiments in total isolation without destabilizing the production code on the <code>master</code> (or <code>main</code>) branch.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q04</span>What is the difference between git switch and git checkout?</div><div class="ans"><code>git switch</code> was introduced in Git 2.23 specifically to switch or create branches safely. <code>git checkout</code> is an older overloaded command used for switching branches, checking out older commits, and restoring modified files.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q05</span>What is a Fast-Forward merge?</div><div class="ans">A Fast-Forward merge happens when the target branch (e.g. master) has no new commits since the feature branch was created. Git simply moves the master pointer forward to the tip of the feature branch without creating an extra merge commit.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q06</span>When does a Merge Conflict occur?</div><div class="ans">A merge conflict occurs when two different branches modify the exact same lines of code in the same file and then both try to merge into a common branch. Git cannot determine which version to keep automatically.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q07</span>Explain the conflict markers: &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD, =======, and &gt;&gt;&gt;&gt;&gt;&gt;&gt; b2.</div><div class="ans"><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> marks the code in the currently checked-out branch (master). <code>=======</code> is the separator between conflicting versions. <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; b2</code> marks the incoming code from branch b2.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q08</span>How do you resolve a merge conflict in Git?</div><div class="ans">Open the file, delete the conflict markers (<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>), choose or combine the code, save the file, and then run <code>git add .</code> followed by <code>git commit -m "conflict resolved"</code>.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q09</span>What does git status show during an unresolved merge conflict?</div><div class="ans">It lists the conflicting file in red under <i>"Unmerged paths: both modified: calculator.py"</i> and warns <i>"fix conflicts and run git commit"</i>.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q10</span>What does git push -u origin main mean?</div><div class="ans">The <code>-u</code> flag sets the upstream tracking reference. It links the local <code>main</code> branch to the remote <code>origin/main</code> branch so future pushes only require typing <code>git push</code>.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q11</span>What is the difference between git pull and git fetch?</div><div class="ans"><code>git fetch</code> downloads remote commits to your local repo without merging them into your working files. <code>git pull</code> runs <code>git fetch</code> and immediately executes <code>git merge</code> into your active branch.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q12</span>How do you abort a merge if you make a mistake?</div><div class="ans">Run <code>git merge --abort</code>. This immediately reverts the working files and repo state back to before the merge started.</div></div>
+ </div>
+
+ <!-- TAB 2: MAVEN (TEACHER QUESTIONS FROM PREVIOUS CHAT) -->
+ <div id="viva-maven" class="tab-content">
+  <div class="qa-card"><div class="q"><span class="q-num">Q01</span>What is a Maven project? (Teacher Question)</div><div class="ans">A Maven project is a Java project whose build, testing, dependencies, and packaging are defined declaratively in an XML file called <code>pom.xml</code>. Maven provides a standardized project layout and automates the build process.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q02</span>What is the Maven project structure? (Teacher Question)</div><div class="ans">Standard structure: <code>src/main/java</code> (application source code), <code>src/main/resources</code> (config files), <code>src/test/java</code> (test code like JUnit), <code>pom.xml</code> (root configuration file), and <code>target/</code> (compiled .class files and packaged .jar artifacts).</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q03</span>What is pom.xml? (Teacher Question)</div><div class="ans">POM stands for <b>Project Object Model</b>. It is the fundamental configuration file in Maven that specifies project coordinates (groupId, artifactId, version), dependencies, plugins, and build goals.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q04</span>What is the use of Maven in DevOps? (Teacher Question)</div><div class="ans">Maven eliminates manual jar file downloads, enforces uniform compilation and unit testing across all developer machines, and provides predictable CLI commands (<code>mvn clean package</code>) that CI servers like Jenkins execute to build and package applications automatically.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q05</span>What is the Maven build lifecycle? (Teacher Question)</div><div class="ans">The build lifecycle is a sequence of defined phases: <b>validate &rarr; compile &rarr; test &rarr; package &rarr; verify &rarr; install &rarr; deploy</b>. Running any phase automatically executes all preceding phases in sequence.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q06</span>Explain Maven & dependency management. (Teacher Question)</div><div class="ans">Instead of manually downloading and adding .jar files to the classpath, you declare library coordinates in <code>pom.xml</code>. Maven automatically downloads the required jars from Maven Central into the local <code>~/.m2</code> repository, along with all their transitive dependencies.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q07</span>What is the role of Maven in a DevOps pipeline? (Teacher Question)</div><div class="ans">Maven serves as the automated build engine inside CI/CD pipelines: Jenkins checks out code from Git &rarr; triggers Maven to compile code &rarr; executes unit tests &rarr; packages the code into a deployable .jar or .war artifact.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q08</span>Outline the difference between Git & Maven working. (Teacher Question)</div><div class="ans"><b>Git</b> is for source code version control (tracking code history, commits, branches). <b>Maven</b> is for build automation and dependency resolution (compiling, running tests, and bundling code into executable jars). Git manages the source; Maven builds it.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q09</span>What are Maven coordinates (groupId, artifactId, version)?</div><div class="ans">They uniquely identify an artifact: <b>groupId</b> is the organization domain (e.g. <code>com.googlecode.json-simple</code>), <b>artifactId</b> is the project name (<code>json-simple</code>), and <b>version</b> is the release tag (<code>1.1.1</code>).</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q10</span>What is a Maven Archetype?</div><div class="ans">An archetype is a project templating toolkit (such as <code>maven-archetype-quickstart</code>) that generates the standard directory structure and starter <code>pom.xml</code> for a new project.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q11</span>In your program, what do JSONParser and JSONObject do?</div><div class="ans"><code>JSONParser</code> reads the character stream from <code>FileReader</code> and parses it into an Object. We cast it to <code>JSONObject</code> (a key-value map) to extract fields via <code>studentobj.get("firstname")</code>.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q12</span>What is the difference between mvn compile and mvn package?</div><div class="ans"><code>mvn compile</code> only compiles the Java source files in <code>src/main/java</code> into <code>.class</code> files. <code>mvn package</code> compiles, executes unit tests, and bundles the compiled code into a distributable <code>.jar</code> or <code>.war</code> in the <code>target/</code> directory.</div></div>
+ </div>
+
+ <!-- TAB 3: DOCKER (TEACHER QUESTIONS FROM PREVIOUS CHAT) -->
+ <div id="viva-docker" class="tab-content">
+  <div class="qa-card"><div class="q"><span class="q-num">Q01</span>What is Docker? (Teacher Question)</div><div class="ans">Docker is an open-source containerization platform that packages an application and all its dependencies, runtime, and libraries into a standardized lightweight container that runs identically in any environment.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q02</span>Why do we need Docker? (Teacher Question)</div><div class="ans">To eliminate the classic <i>"it works on my machine"</i> problem. Docker ensures environment consistency between a developer's laptop, testing servers, and production clouds without hardware virtualization overhead.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q03</span>What is the importance of Docker in DevOps? (Teacher Question)</div><div class="ans">Docker provides lightweight isolation, boots in milliseconds, drastically reduces infrastructure costs compared to VMs, enables rapid CI/CD automated deployments, and forms the foundation for container orchestration (Kubernetes).</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q04</span>What is the difference between a Docker Image and a Docker Container?</div><div class="ans">A <b>Docker Image</b> is a read-only, immutable template built from layered instructions. A <b>Docker Container</b> is an active, runnable, stateful instance of an image with a thin writable top layer.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q05</span>What is a Dockerfile and what does FROM httpd:latest mean?</div><div class="ans">A Dockerfile is a text recipe containing instructions to build an image. <code>FROM httpd:latest</code> sets the official Apache HTTP Server image as the base image for our container.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q06</span>What does COPY index.html /usr/local/apache2/htdocs/ do?</div><div class="ans">It copies our local custom <code>index.html</code> web page from the host machine into Apache's default public web root folder inside the container image.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q07</span>In docker run -d --name c1 -p 49153:80 my-app, explain each flag.</div><div class="ans"><code>-d</code> runs in background (detached mode). <code>--name c1</code> gives the container a friendly name. <code>-p 49153:80</code> maps port 49153 on the host laptop to port 80 inside the container. <code>my-app</code> is the image to run.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q08</span>Which is the host port and which is the container port in -p 49153:80?</div><div class="ans">The format is <code>host_port:container_port</code>. <b>49153</b> is the port opened on your physical machine; <b>80</b> is Apache's internal container listening port.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q09</span>Why must you tag an image before pushing to Docker Hub?</div><div class="ans">Docker Hub routes images by account namespace. You must tag the image as <code>username/repository:tag</code> (e.g. <code>ommd3076/my-app:latest</code>) so Docker knows where to publish the image.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q10</span>Why did Apache display "It works!" instead of your custom HTML?</div><div class="ans">Because in Docker Desktop, the base image <code>httpd</code> was launched by mistake instead of our custom built image <code>my-app</code>, or the trailing slash was omitted in <code>/usr/local/apache2/htdocs/</code>, or the browser cached the static page.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q11</span>What is the command to view running vs all containers?</div><div class="ans"><code>docker ps</code> displays only active/running containers. <code>docker ps -a</code> displays all containers, including stopped and exited containers.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q12</span>What is Docker layer caching?</div><div class="ans">Each command in a Dockerfile creates an immutable filesystem layer. When re-running <code>docker build</code>, Docker reuses unchanged layers from previous builds, speeding up the build from minutes to seconds.</div></div>
+ </div>
+
+ <!-- TAB 4: JENKINS & POLLING (TEACHER QUESTIONS) -->
+ <div id="viva-jenkins" class="tab-content">
+  <div class="qa-card"><div class="q"><span class="q-num">Q01</span>What is Continuous Integration (CI) and why do we use Jenkins?</div><div class="ans">CI is an engineering practice where code changes are continuously merged into a shared repo and validated by automated builds and tests. Jenkins is the leading automation server that orchestrates this entire pipeline automatically.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q02</span>What is Polling (Poll SCM)? (Teacher Question)</div><div class="ans">Polling is a <b>pull-based</b> build trigger where Jenkins periodically queries the GitHub repository on a scheduled timer (using cron syntax, e.g. <code>H/5 * * * *</code> every 5 mins) to check if any new commits were pushed. If changes exist, Jenkins starts a build.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q03</span>What is a Webhook and how does it differ from Polling? (Teacher Question)</div><div class="ans">A <b>Webhook</b> is <b>push-based</b>: GitHub immediately sends an HTTP POST request to Jenkins the exact second a developer pushes code. Difference: Polling introduces delays and wastes server CPU asking repeatedly; Webhooks trigger instant, real-time builds without polling overhead.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q04</span>Where is the Jenkins initial admin password located on Windows? (Teacher Question)</div><div class="ans">In <code>C:\Program Files\Jenkins\secrets\initialAdminPassword</code> or <code>C:\ProgramData\Jenkins\.jenkins\secrets\initialAdminPassword</code>. (It is a text file with no <code>.txt</code> extension).</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q05</span>Why did PowerShell give "'C:\Program' is not recognized" when getting the password?</div><div class="ans">Because the path contains a space between "Program" and "Files". Without double quotes, PowerShell treated <code>C:\Program</code> as the command name. The fix is: <code>Get-Content "C:\Program Files\Jenkins\secrets\initialAdminPassword"</code>.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q06</span>What is the default port for Jenkins and how do you access it?</div><div class="ans">Default port is <b>8080</b>, accessed in the web browser at <code>http://localhost:8080</code>.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q07</span>What is a Freestyle project in Jenkins?</div><div class="ans">A Freestyle project is a configurable build job created and managed entirely through the Jenkins web UI with form fields for SCM, build triggers, batch/shell commands, and post-build actions.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q08</span>What does the branch specifier */main mean in Jenkins?</div><div class="ans">It tells the Git plugin to build the <code>main</code> branch from any remote repository (the wildcard <code>*</code> matches remote tracking origin).</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q09</span>What batch commands did you configure in the build step?</div><div class="ans">Under <i>Execute Windows batch command</i>: (1) <code>java --version</code> (verifies JRE), (2) <code>javac test.java</code> (compiles Java file), and (3) <code>java test</code> (runs class and verifies output).</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q10</span>What does Console Output in Jenkins show?</div><div class="ans">It shows the real-time standard output log of the build, including Git checkout hash, commands executed, compiler messages, and final status (<code>Finished: SUCCESS</code> or <code>FAILURE</code>).</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q11</span>What is the difference between build status SUCCESS, UNSTABLE, and FAILURE?</div><div class="ans"><b>SUCCESS</b> (blue/green ball): All compile and test steps passed. <b>UNSTABLE</b> (yellow ball): Build finished but unit tests failed. <b>FAILURE</b> (red ball): Compilation crashed or script threw an error.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q12</span>What is a Jenkins Workspace?</div><div class="ans">A dedicated folder on the Jenkins controller disk (under <code>workspace/&lt;job-name&gt;</code>) where Jenkins clones the Git repository and executes the build scripts.</div></div>
+ </div>
+
+ <!-- TAB 5: JENKINS + SLACK (TEACHER QUESTIONS) -->
+ <div id="viva-slack" class="tab-content">
+  <div class="qa-card"><div class="q"><span class="q-num">Q01</span>Why integrate Jenkins with Slack in a DevOps workflow? (Teacher Question)</div><div class="ans">It implements <b>ChatOps</b>: automated pipeline notifications are pushed instantly to the team's Slack channel. Developers know immediately if a build broke without having to log in to Jenkins.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q02</span>Which plugin is used in Jenkins for Slack integration?</div><div class="ans">The official <b>Slack Notification Plugin</b>, installed via <i>Manage Jenkins &rarr; Plugins</i>.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q03</span>What app must be installed in your Slack workspace?</div><div class="ans">The <b>Jenkins CI</b> integration app from the Slack App Directory.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q04</span>What is the Slack Integration Token and where do you get it?</div><div class="ans">It is an authentication secret generated in Step 3 of the Jenkins CI app setup inside Slack after you select the destination channel. Jenkins uses it to authorize incoming alert messages.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q05</span>What credential type must you select in Jenkins to store the Slack token?</div><div class="ans"><b>Secret text</b>. You paste the Slack Integration Token into the "Secret" field and give it an ID (e.g. <code>admin</code> or <code>slack-token</code>).</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q06</span>What must be entered into the Jenkins Slack "Workspace" field?</div><div class="ans">Only the <b>team domain / subdomain prefix</b> (e.g. <code>om-devops</code>). You must NEVER enter the full URL like <code>https://om-devops.slack.com</code>.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q07</span>Why did your Slack "Test Connection" fail previously? (The ChatGPT Browser Fix)</div><div class="ans">Three exact reasons: (1) Entering full URL instead of subdomain in Workspace, (2) storing the token as Username/Password instead of Secret text, and (3) omitting the <code>#</code> prefix from channel name (must be <code>#devops</code>).</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q08</span>How must channel names be formatted in Jenkins Slack settings?</div><div class="ans">With a hash prefix for public channels: <code>#channel-name</code> (e.g. <code>#devops</code>), or <code>@username</code> for direct user notifications.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q09</span>What are Post-build Actions in a Jenkins job?</div><div class="ans">Steps executed automatically after the main build commands finish, regardless of success or failure. In our lab, we added <i>Slack Notifications</i> as a post-build action.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q010</span>Which checkboxes did you enable under Slack Notifications in the job?</div><div class="ans"><i>Notify Build Start</i>, <i>Notify Success</i>, <i>Notify Failure</i>, and <i>Notify Every Failure</i>.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q011</span>What exact message appears in Slack when you click Build Now?</div><div class="ans">First: <code>Starting build #... by user admin</code>. Then upon completion: a green vertical bar with <code>SUCCESS after 1 sec</code> and a direct link to the Jenkins build.</div></div>
+  <div class="qa-card"><div class="q"><span class="q-num">Q012</span>What is ChatOps?</div><div class="ans">ChatOps is an operational collaboration model that places automated bots, alerts, and operational tooling directly inside group chat platforms (like Slack) so developers and operations collaborate transparently in real time.</div></div>
+ </div>
+</div>
+</section>
+
+<!-- SECTION 4: CHECKLIST -->
+<section class="section" id="checklist">
+<div class="section-index">04</div>
+<div class="wrap">
+ <div class="section-head">
+  <div class="eyebrow">04 / Quick Command Checklist</div>
+  <h2>Cheat-Sheet for Immediate Exam Execution.</h2>
+ </div>
+
+ <div class="four">
+  <div class="panel">
+   <div class="k">01 / GIT</div>
+   <p class="body"><code>git init</code><br><code>git branch b1</code><br><code>git switch b1</code><br><code>git merge b1</code><br><code>git merge b2</code><br><code>git add .</code><br><code>git commit -m "msg"</code></p>
+  </div>
+  <div class="panel">
+   <div class="k">02 / MAVEN</div>
+   <p class="body"><b>Archetype:</b><br><code>quickstart</code><br><b>Dependency:</b><br><code>json-simple 1.1.1</code><br><b>JSON Path:</b><br><code>.\\JSON\\student.json</code><br><b>Parser:</b><br><code>JSONParser</code></p>
+  </div>
+  <div class="panel">
+   <div class="k">03 / DOCKER</div>
+   <p class="body"><code>FROM httpd:latest</code><br><code>COPY index.html /usr/local/apache2/htdocs/</code><br><code>docker build -t app .</code><br><code>docker run -d -p 49153:80 app</code><br><code>docker tag app user/app</code><br><code>docker push user/app</code></p>
+  </div>
+  <div class="panel">
+   <div class="k">04 & 05 / JENKINS & SLACK</div>
+   <p class="body"><b>Password:</b><br><code>Get-Content "C:\Program Files\Jenkins\secrets\initialAdminPassword"</code><br><b>URL:</b> <code>localhost:8080</code><br><b>Slack Workspace:</b> <code>subdomain</code><br><b>Slack Cred:</b> Secret text</p>
+  </div>
+ </div>
+</div>
+</section>
+
+</main>
+
+<footer class="footer">
+<div class="wrap">
+ <b>DEVOPS LABORATORY (BISDL506)</b>
+ <span>INTERNAL EXAM MASTER FIELDNOTES — READY FOR 15+/20</span>
+</div>
+</footer>
+
+<script>
+(function(){
+ const progress=document.getElementById('progress');
+ const links=[...document.querySelectorAll('.nav a')];
+ const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+ let raf=false;
+ function update(){
+  const d=document.documentElement;
+  const range=Math.max(1,d.scrollHeight-d.clientHeight);
+  progress.style.width=(100*window.scrollY/range)+'%';
+  let current=sections[0];
+  for(const section of sections){
+   if(section.getBoundingClientRect().top<180) current=section;
+  }
+  links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current.id));
+  raf=false;
+ }
+ window.addEventListener('scroll',()=>{if(!raf){requestAnimationFrame(update);raf=true;}},{passive:true});
+ window.addEventListener('resize',update);
+ update();
+})();
+
+function showProcTab(id){
+ document.querySelectorAll('#procedures .tab-content').forEach(el=>el.classList.remove('active'));
+ document.querySelectorAll('#procedures .tab-btn').forEach(el=>el.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ event.target.classList.add('active');
+}
+
+function showVivaTab(id){
+ document.querySelectorAll('#viva .tab-content').forEach(el=>el.classList.remove('active'));
+ document.querySelectorAll('#viva .tab-btn').forEach(el=>el.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
