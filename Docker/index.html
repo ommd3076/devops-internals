@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume | High Editorial Brutalist</title>
+    <style>
+        /* Import a sophisticated Serif and a raw Monospace */
+        @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+        :root {
+            --bg: #e4e2dd; /* Newspaper off-white */
+            --fg: #0f0f0f; /* Harsh black */
+            --accent: #ff2a00; /* Brutalist stark red */
+            --font-serif: 'Bodoni Moda', serif;
+            --font-mono: 'Space Mono', monospace;
+            --border-thick: 4px solid var(--fg);
+            --border-thin: 2px solid var(--fg);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--fg);
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            line-height: 1.2;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- MARQUEE --- */
+        .marquee {
+            background: var(--accent);
+            color: var(--bg);
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 0.8vw 0;
+            border-bottom: var(--border-thick);
+        }
+
+        .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 20s linear infinite;
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* --- MAIN GRID --- */
+        .wrapper {
+            border: var(--border-thick);
+            margin: 2vw;
+            display: grid;
+            grid-template-columns: 1fr;
+            background: var(--bg);
+        }
+
+        @media (min-width: 900px) {
+            .wrapper {
+                grid-template-columns: 1fr 3fr;
+            }
+        }
+
+        /* --- HEADER (Editorial Focus) --- */
+        .header-section {
+            grid-column: 1 / -1;
+            border-bottom: var(--border-thick);
+            position: relative;
+            background: var(--bg);
+            padding: 2vw 2vw 4vw 2vw;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(5rem, 15vw, 18rem);
+            font-weight: 300;
+            line-height: 0.80;
+            text-transform: none;
+            letter-spacing: -0.06em;
+            color: var(--fg);
+        }
+
+        h1 i {
+            font-weight: 400;
+            color: var(--accent);
+        }
+
+        .role {
+            font-size: clamp(1.2rem, 3vw, 2.5rem);
+            font-weight: bold;
+            margin-top: 3vw;
+            max-width: 60%;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            border-right: none;
+            border-bottom: var(--border-thick);
+        }
+
+        @media (min-width: 900px) {
+            .sidebar {
+                border-right: var(--border-thick);
+                border-bottom: none;
+            }
+        }
+
+        .info-block {
+            padding: 3vw;
+            border-bottom: var(--border-thin);
+        }
+
+        .info-block:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--fg);
+            display: inline-block;
+            padding-bottom: 0.2rem;
+        }
+
+        .info-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .solid-block {
+            flex-grow: 1;
+            background: var(--fg);
+            min-height: 150px;
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 6vw, 5rem);
+            text-transform: none;
+            padding: 2vw 3vw;
+            background: var(--fg);
+            color: var(--bg);
+            border-bottom: var(--border-thick);
+            font-style: italic;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+
+        .item {
+            padding: 4vw 3vw;
+            border-bottom: var(--border-thin);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 1200px) {
+            .item {
+                grid-template-columns: 200px 1fr;
+            }
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .year {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .company {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .desc {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Clean grotesque for readability */
+            text-transform: none;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            max-width: 75ch;
+            color: #222;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Brutalist Marquee Banner -->
+    <div class="marquee">
+        <span>● OPEN TO NEW OPPORTUNITIES ● CREATIVE DEVELOPER ● ART DIRECTOR ● OPEN TO NEW OPPORTUNITIES ● CREATIVE DEVELOPER ● ART DIRECTOR </span>
+    </div>
+
+    <div class="wrapper">
+        
+        <!-- High Editorial Header -->
+        <header class="header-section">
+            <h1>Om<br><i>DOddamani.</i></h1>
+            <div class="role">Avant-Garde Designer & Creative Engineer</div>
+        </header>
+
+        <!-- Sidebar (Contact & Skills) -->
+        <aside class="sidebar">
+            <div class="info-block">
+                <div class="info-label">Contact</div>
+                <div class="info-content">
+                    hello@yourdomain.com<br>
+                    +1 (555) 987-6543<br>
+                    github.com/username
+                </div>
+            </div>
+            
+            <div class="info-block">
+                <div class="info-label">Location</div>
+                <div class="info-content">
+                    Bengaluru, IN<br>
+                    Earth / Sector 4
+                </div>
+            </div>
+
+            <div class="info-block">
+                <div class="info-label">Core Arsenal</div>
+                <div class="info-content">
+                    HTML / CSS / JS<br>
+                    WebGL / Three.js<br>
+                    Typography<br>
+                    Art Direction<br>
+                    System Architecture
+                </div>
+            </div>
+
+            <!-- Heavy Brutalist filler block -->
+            <div class="solid-block"></div>
+        </aside>
+
+        <!-- Main Experience & Education -->
+        <main class="main-content">
+            <h2>Experience</h2>
+            
+            <article class="item">
+                <div class="year">2023 — PRES</div>
+                <div>
+                    <h3>Senior Design Engineer</h3>
+                    <div class="company">Studio Monolith</div>
+                    <p class="desc">Spearheaded the complete visual overhaul of the flagship product using high-editorial layout algorithms. Reduced CSS bloat by 40% while increasing visual impact. Bridged the gap between the design and engineering teams to produce award-winning interfaces.</p>
+                </div>
+            </article>
+
+            <article class="item">
+                <div class="year">2020 — 2023</div>
+                <div>
+                    <h3>Frontend Architect</h3>
+                    <div class="company">Vanguard Media</div>
+                    <p class="desc">Architected scalable design systems blending harsh brutalist aesthetics with refined typography. Developed custom WebGL shaders for digital campaigns that reached over 2 million unique users worldwide.</p>
+                </div>
+            </article>
+
+            <article class="item">
+                <div class="year">2018 — 2020</div>
+                <div>
+                    <h3>UI / UX Developer</h3>
+                    <div class="company">Obscura Agency</div>
+                    <p class="desc">Created rapid prototypes for high-profile fashion clients. Led the adoption of modern CSS grid techniques across the agency, streamlining the development process for complex layouts.</p>
+                </div>
+            </article>
+
+            <h2>Education</h2>
+            
+            <article class="item">
+                <div class="year">2014 — 2018</div>
+                <div>
+                    <h3>BFA in Interaction Design</h3>
+                    <div class="company">Institute of Contemporary Arts</div>
+                    <p class="desc">Graduated with honors. Thesis: "The Intersection of Anti-Design, Brutalism, and Usability in the Post-Modern Digital Age."</p>
+                </div>
+            </article>
+        </main>
+    </div>
+
+</body>
+</html>
